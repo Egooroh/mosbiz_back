@@ -13,7 +13,7 @@
 
 1. **Клонирование репозитория и установка зависимостей**
    ```bash
-   git clone <url-вашего-репозитория>
+   git clone https://github.com/Egooroh/mosbiz_back
    cd mosbiz-api
    composer install
    ```
@@ -87,14 +87,26 @@ php artisan scribe:generate
 ### Мероприятия
 * **GET /api/v1/events**
   Возвращает расписание мероприятий, отсортированное по дате начала по возрастанию.
-  * **Успешный ответ (200):** Массив объектов в ключе `data`. Каждый объект содержит: `id`, `title`, `start_date`, `end_date`, `category`, `description`, `image_url` (абсолютный URL или null).
+  * **Успешный ответ (200):** Массив объектов в ключе `data`. Каждый объект содержит:
+    * `id` (integer) — уникальный идентификатор мероприятия.
+    * `title` (string) — название мероприятия.
+    * `start_date` (string) — дата и время начала.
+    * `end_date` (string) — дата и время окончания.
+    * `category` (string) — категория мероприятия.
+    * `description` (string) — подробное описание.
+    * `image_url` (string|null) — абсолютный URL изображения.
 
 ### Команда (Департамент)
 * **GET /api/v1/team**
   Возвращает список сотрудников, предварительно отформатированный для фронтенда.
   * **Успешный ответ (200):** Объект `data` с двумя ключами:
-    * `head` (object|null) — объект сотрудника, отмеченного как руководитель (`is_head = true`). Включает: `id`, `name`, `position`, `description`, `photo_url`.
-    * `members` (array) — массив объектов остальных сотрудников (`is_head = false`).
+    * `head` (object|null) — объект руководителя (`is_head = true`), содержащий:
+    * `id` (integer) — уникальный идентификатор.
+    * `name` (string) — ФИО сотрудника.
+    * `position` (string) — должность или направление.
+    * `description` (string|null) — описание или регалии.
+    * `photo_url` (string|null) — абсолютный URL фотографии.
+    * `members` (array) — массив объектов остальных сотрудников (`is_head = false`). Каждый объект имеет структуру, полностью аналогичную объекту `head`.
 
 ### Обратная связь
 * **POST /api/v1/feedback**
