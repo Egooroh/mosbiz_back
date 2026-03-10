@@ -1,0 +1,79 @@
+name: 'Настройки сайта'
+description: |-
+
+  API для получения глобальных данных интерфейса (шапка, баннер, статистика).
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/settings
+    metadata:
+      custom: []
+      groupName: 'Настройки сайта'
+      groupDescription: |-
+
+        API для получения глобальных данных интерфейса (шапка, баннер, статистика).
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Получить настройки главного экрана
+        Возвращает глобальные данные интерфейса сайта: логотип, контактный телефон,
+        список социальных сетей, тексты главного баннера и статистические карточки.
+      description: 'Эти данные используются для отображения главной страницы сайта.'
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "data": {
+              "id": 1,
+              "logo": "/storage/logo.png",
+              "phone": "+7 (999) 123-45-67",
+              "socials": [
+                {
+                  "name": "telegram",
+                  "url": "https://t.me/company"
+                }
+              ],
+              "banner_title": "Программы и инструменты для развития бизнеса",
+              "banner_subtitle": "от Департамента предпринимательства и инновационного развития Москвы",
+              "stats": [
+                {
+                  "title": "105 млрд ₽",
+                  "description": "Направлено на поддержку "
+                }
+              ]
+            }
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "Настройки сайта еще не заполнены в админ-панели"
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null

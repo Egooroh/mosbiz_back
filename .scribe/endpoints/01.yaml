@@ -1,0 +1,81 @@
+name: Мероприятия
+description: |-
+
+  API для работы с расписанием мероприятий.
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/events
+    metadata:
+      custom: []
+      groupName: Мероприятия
+      groupDescription: |-
+
+        API для работы с расписанием мероприятий.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Получить список мероприятий'
+      description: |-
+        Возвращает список всех мероприятий, отсортированных по дате начала
+        (от ближайших к самым поздним). Каждое мероприятие содержит основную
+        информацию: название, даты проведения, категорию, описание и ссылку
+        на изображение.
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "data": [
+              {
+                "id": 1,
+                "title": "День без турникетов",
+                "start_date": "2026-05-20",
+                "end_date": "2026-05-26",
+                "category": "Человеческий капитал и профнавигация",
+                "description": "Бесплатные экскурсии для горожан на площадки высокотехнологичных предприятий. Возможность побывать в офисах крупных компаний, научных лабораториях и других интересных локациях",
+                "image_url": "https://example.com/storage/events/event1.jpg"
+              },
+              {
+                "id": 2,
+                "title": "Московская неделя интерьера и дизайна",
+                "start_date": "2026-05-28",
+                "end_date": "",
+                "category": "Инновации",
+                "description": "Главное событие в индустрии интерьера и дизайна — выставочные площади и деловая программа",
+                "image_url": "https://example.com/storage/events/event2.jpg"
+              }
+            ]
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "Мероприятия не найдены"
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
