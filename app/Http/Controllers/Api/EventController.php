@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Event;
+use Carbon\Carbon;
 
 /**
  * @group Мероприятия
@@ -56,8 +57,8 @@ class EventController extends Controller
             return [
                 'id' => $event->id,
                 'title' => $event->title,
-                'start_date' => $event->start_date,
-                'end_date' => $event->end_date,
+                'start_date' => $event->start_date ? Carbon::parse($event->start_date)->format('Y-m-d H:i:s') : null,
+                'end_date' => $event->end_date ? Carbon::parse($event->end_date)->format('Y-m-d H:i:s') : null,
                 'category' => $event->category,
                 'description' => $event->description,
                 'image_url' => $event->image_path ? asset('storage/' . $event->image_path) : null,

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SiteSetting;
+use Carbon\Carbon;
 
 /**
  * @group Настройки сайта
@@ -57,10 +58,36 @@ class SettingController extends Controller
                 'message' => 'Настройки сайта еще не заполнены в админ-панели'
             ], 404);
         }
+        
+        $socials = is_array($settings->social_links) 
+            ? collect($settings->social_links)->map(function ($link) {
+                return [
+                    'icon' => isset($link['icon']) ? asset('storage/' . $link['icon']) : null,
+                    'url'  => $link['url'] ?? null,
+                ];
+            })->toArray() 
+            : [];
+
+        $statistics = is_array($settings->statistics)
+            ? collect($settings->statistics)->map(function ($statistics) {
+                return [
+                    'title' => $statistics['value'] ?? '',
+                    'description' => $statistics['description'] ?? '',
+                ];
+            })->toArray()
+            : [];
 
         return response()->json([
             'success' => true,
-            'data' => $settings
+            'data' => [
+                'id' => $settings->id,
+                'logo' => $settings->header_logo ? asset('storage/' . $settings->header_logo) : null,
+                'phone' => $settings->phone,
+                'socials' => $socials,
+                'banner_title' => $settings->hero_title,
+                'banner_subtitle' => $settings->hero_subtitle,
+                'statistics' => $statistics,
+            ]
         ]);
     }
 }
